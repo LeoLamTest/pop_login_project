@@ -1,20 +1,45 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useState } from 'react';
+import { View, TextInput, Alert, TouchableOpacity, Text, StyleSheet, Button } from 'react-native';
 
-export default function App() {
+const App = () => {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleSignIn = () => {
+    if (password === 'password') {
+      navigateToWelcomeScreen();
+    } else {
+      showIncorrectPasswordAlert();
+    }
+  };
+
+  const navigateToWelcomeScreen = () => {
+    <View>
+       <Text>Welcome, print(username)</Text>
+    </View>
+  };
+
+  const showIncorrectPasswordAlert = () => {
+    Alert.alert('Password is incorrect');
+  };
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
+    <View>
+      <TextInput
+        placeholder="Username"
+        value={username}
+        onChangeText={(text) => setUsername(text)}
+      />
+      <TextInput
+        secureTextEntry
+        placeholder="Password"
+        value={password}
+        onChangeText={(text) => setPassword(text)}
+      />
+        <Button title="Sign In" onPress={handleSignIn} />
+       
     </View>
   );
-}
+};
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default App;
